@@ -22,4 +22,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapDelete("/posts/{id}/comments", (int id) =>
+{
+    // list goes here equal to actual list reference . first or default with id 
+    // if statement goes here, if 
+});
+
 app.Run();
