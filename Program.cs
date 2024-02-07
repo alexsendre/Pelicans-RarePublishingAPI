@@ -75,7 +75,7 @@ List<Posts> posts = new()
     new Posts
     {
        Id = 61-8009667,
-       UserId = 39-6187989,
+       UserId = 2,
        CategoryId = 04-5762968,
        Title = "Discovery",
        PublicationDate = new DateTime (2023,08,28),
@@ -87,7 +87,7 @@ List<Posts> posts = new()
      new Posts
     {
        Id = 70-5141389,
-       UserId = 19-0919972,
+       UserId = 1,
        CategoryId = 92-4674448,
        Title = "Mandatory",
        PublicationDate = new DateTime (2023,11,11),
@@ -99,7 +99,7 @@ List<Posts> posts = new()
       new Posts
     {
        Id = 18-2496682,
-       UserId = 23-1158461,
+       UserId = 5,
        CategoryId = 11-245876,
        Title = "Scary",
        PublicationDate = new DateTime (2024,01,10),
@@ -111,7 +111,7 @@ List<Posts> posts = new()
       new Posts
     {
        Id = 37-3151614,
-       UserId = 77-1808556,
+       UserId = 4,
        CategoryId = 73-8851661,
        Title = "Re-Engineered",
        PublicationDate = new DateTime (2023,04,20),
@@ -123,7 +123,7 @@ List<Posts> posts = new()
       new Posts
     {
        Id = 42-4242424,
-       UserId = 32-4567812,
+       UserId = 3,
        CategoryId = 12-3456789,
        Title = "Engineered",
        PublicationDate = new DateTime (2023,06,11),
@@ -131,6 +131,50 @@ List<Posts> posts = new()
        Content = "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
        Approved = true
     },
+
+};
+
+List<Subscriptions> subscriptions = new()
+{
+    new Subscriptions
+    {
+        Id = 93-2257143,
+        FollowerId = 90-7118335,
+        AuthorId = 77-7261001,
+        CreatedOn = new DateTime (2023,02,12)
+    },
+
+     new Subscriptions
+    {
+        Id = 88-6656105,
+        FollowerId = 71-9820238,
+        AuthorId = 14-2366074,
+        CreatedOn = new DateTime (2023,12,22)
+    },
+
+      new Subscriptions
+    {
+        Id = 02-2210850,
+        FollowerId = 54-5961976,
+        AuthorId = 23-8698546,
+        CreatedOn = new DateTime (2023,07,16)
+    },
+
+      new Subscriptions
+    {
+        Id = 10-4200097,
+        FollowerId = 83-2785419,
+        AuthorId = 82-0117022,
+        CreatedOn = new DateTime (2022,06,05)
+    },
+
+      new Subscriptions
+      {
+        Id = 04-1773521,
+        FollowerId = 43-1788258,
+        AuthorId = 27-1119523,
+        CreatedOn = new DateTime (2024,02,02)
+      }
 
 };
 
