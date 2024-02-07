@@ -76,7 +76,7 @@ List<Posts> posts = new()
     {
        Id = 1,
        UserId = 2,
-       CategoryId = 04-5762968,
+       CategoryId = 3,
        Title = "Discovery",
        PublicationDate = new DateTime (2023,08,28),
        ImageUrl = "http://dummyimage.com/155x100.png/ff4444/ffffff",
@@ -88,7 +88,7 @@ List<Posts> posts = new()
     {
        Id = 2,
        UserId = 1,
-       CategoryId = 92-4674448,
+       CategoryId = 4,
        Title = "Mandatory",
        PublicationDate = new DateTime (2023,11,11),
        ImageUrl = "http://dummyimage.com/250x100.png/cc0000/ffffff",
@@ -100,7 +100,7 @@ List<Posts> posts = new()
     {
        Id = 3,
        UserId = 5,
-       CategoryId = 11-245876,
+       CategoryId = 1,
        Title = "Scary",
        PublicationDate = new DateTime (2024,01,10),
        ImageUrl = "http://dummyimage.com/250x100.png/cc0000/ffffff",
@@ -112,7 +112,7 @@ List<Posts> posts = new()
     {
        Id = 4,
        UserId = 4,
-       CategoryId = 73-8851661,
+       CategoryId = 2,
        Title = "Re-Engineered",
        PublicationDate = new DateTime (2023,04,20),
        ImageUrl = "http://dummyimage.com/220x100.png/5fa2dd/ffffff",
@@ -124,7 +124,7 @@ List<Posts> posts = new()
     {
        Id = 5,
        UserId = 3,
-       CategoryId = 12-3456789,
+       CategoryId = 5,
        Title = "Engineered",
        PublicationDate = new DateTime (2023,06,11),
        ImageUrl = "http://dummyimage.com/220x100.png/5fa2dd/ffffff",
