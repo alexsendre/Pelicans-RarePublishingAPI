@@ -266,4 +266,17 @@ app.MapGet("/posts", () =>
     return posts;
 });
 
+app.MapGet("posts/{id}", (int id) =>
+{
+    Posts userPosts = posts.FirstOrDefault(p => p.Id == id);
+    if (userPosts == null)
+    {
+        return Results.NotFound();
+    }
+    else
+    {
+        return Results.Ok(userPosts);
+    }
+});
+
 app.Run();
