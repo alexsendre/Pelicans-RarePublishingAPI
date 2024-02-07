@@ -184,7 +184,7 @@ List<Categories> categories = new()
                 {
                     Id = 1,
                     Label = "Fiction",
-                   
+
                 },
                 new Categories
                 {
@@ -211,7 +211,7 @@ List<Categories> categories = new()
 
                 }
 
-            }; 
+            };
 
 List<Tags> tags = new()
 {
@@ -260,5 +260,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/posts", () =>
+{
+    return posts;
+});
 
 app.Run();
