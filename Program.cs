@@ -178,6 +178,41 @@ List<Subscriptions> subscriptions = new()
 
 };
 
+List<Categories> categories = new()
+{
+                new Categories
+                {
+                    Id = 1,
+                    Label = "Fiction",
+                   
+                },
+                new Categories
+                {
+                    Id = 2,
+                    Label = "Non-fiction",
+
+                },
+                new Categories
+                {
+                    Id = 3,
+                    Label = "Science Fiction",
+
+                },
+                new Categories
+                {
+                    Id = 4,
+                    Label = "Fantasy",
+
+                },
+                new Categories
+                {
+                    Id = 5,
+                    Label = "Mystery",
+
+                }
+
+            };
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
