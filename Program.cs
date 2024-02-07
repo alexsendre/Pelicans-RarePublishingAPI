@@ -263,6 +263,30 @@ List<Categories> categories = new()
 
 };
 
+List<Tags> tags = new()
+{
+    new Tags
+    {
+        Id = 1,
+        Label = "Interesting",
+    },
+    new Tags
+    {
+        Id = 2,
+        Label = "Entertaining",
+    },
+    new Tags
+    {
+        Id = 3,
+        Label = "Intense",
+    },
+    new Tags
+    {
+        Id = 4,
+        Label = "Monotonous",
+    }
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
