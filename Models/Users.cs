@@ -23,5 +23,6 @@ namespace Pelicans_RarePublishing.Models
         public DateTime? CreatedOn { get; set; }
 
         public bool? Active { get; set; }
+
     }
 }
