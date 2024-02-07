@@ -1,6 +1,6 @@
 using Pelicans_RarePublishing.Models;
 
-List<Pelicans_RarePublishing.Models.Users> users = new List<Pelicans_RarePublishing.Models.Users>
+List<Users> users = new()
 {
                 new Users
                 {
@@ -69,8 +69,6 @@ List<Pelicans_RarePublishing.Models.Users> users = new List<Pelicans_RarePublish
                 }
 
             };
-
-using Pelicans_RarePublishing.Models;
 
 List<Posts> posts = new()
 {
