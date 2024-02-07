@@ -173,6 +173,15 @@ List<Comments> comments = new()
 
 };
 
+List<Reactions> reactions = new()
+{
+    new Reactions
+    {
+        Id = 1,
+        Emoji = 1
+    }
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -196,11 +205,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapDelete("/posts/{id}/comments", (int id) =>
-{
-    // list goes here equal to actual list reference . first or default with id 
-    // if statement goes here, if 
-});
 
 app.Run();
