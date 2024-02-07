@@ -219,7 +219,12 @@ List<Reactions> reactions = new()
     new Reactions
     {
         Id = 1,
-        Emoji = 1
+        Emoji = "f004"
+    },
+    new Reactions
+    {
+        Id = 2,
+        Emoji = "f165"
     }
 };
 
