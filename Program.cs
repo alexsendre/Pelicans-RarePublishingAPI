@@ -211,7 +211,7 @@ List<Categories> categories = new()
 
                 }
 
-            };
+            }; 
 
 var builder = WebApplication.CreateBuilder(args);
 
