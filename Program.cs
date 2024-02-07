@@ -1,6 +1,6 @@
 using Pelicans_RarePublishing.Models;
 
-List<Users> users = new List<Users>
+List<Users> users = new()
 {
     new Users
     {
@@ -129,6 +129,46 @@ List<Posts> posts = new()
        ImageUrl = "http://dummyimage.com/220x100.png/5fa2dd/ffffff",
        Content = "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
        Approved = true
+    },
+
+};
+
+List<Comments> comments = new()
+{
+    new Comments
+    {
+        Id = 1,
+        AuthorId = 1,
+        PostId = 2,
+        Content = "Wow!! Love it!",
+    },
+    new Comments
+    {
+        Id = 2,
+        AuthorId = 2,
+        PostId = 1,
+        Content = "This is so awesome"
+    },
+    new Comments
+    {
+        Id = 3,
+        AuthorId = 3,
+        PostId = 4,
+        Content = "This is AMAZING!"
+    },
+    new Comments
+    {
+        Id = 4,
+        AuthorId = 4,
+        PostId = 3,
+        Content = "This is so awesome"
+    },
+    new Comments
+    {
+        Id = 5,
+        AuthorId = 5,
+        PostId = 1,
+        Content = "I literally cannot rn omg"
     },
 
 };
