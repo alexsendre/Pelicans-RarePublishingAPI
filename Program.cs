@@ -74,9 +74,9 @@ List<Posts> posts = new()
 {
     new Posts
     {
-       Id = 61-8009667,
+       Id = 1,
        UserId = 2,
-       CategoryId = 04-5762968,
+       CategoryId = 3,
        Title = "Discovery",
        PublicationDate = new DateTime (2023,08,28),
        ImageUrl = "http://dummyimage.com/155x100.png/ff4444/ffffff",
@@ -86,9 +86,9 @@ List<Posts> posts = new()
 
      new Posts
     {
-       Id = 70-5141389,
+       Id = 2,
        UserId = 1,
-       CategoryId = 92-4674448,
+       CategoryId = 4,
        Title = "Mandatory",
        PublicationDate = new DateTime (2023,11,11),
        ImageUrl = "http://dummyimage.com/250x100.png/cc0000/ffffff",
@@ -98,9 +98,9 @@ List<Posts> posts = new()
 
       new Posts
     {
-       Id = 18-2496682,
+       Id = 3,
        UserId = 5,
-       CategoryId = 11-245876,
+       CategoryId = 1,
        Title = "Scary",
        PublicationDate = new DateTime (2024,01,10),
        ImageUrl = "http://dummyimage.com/250x100.png/cc0000/ffffff",
@@ -110,9 +110,9 @@ List<Posts> posts = new()
 
       new Posts
     {
-       Id = 37-3151614,
+       Id = 4,
        UserId = 4,
-       CategoryId = 73-8851661,
+       CategoryId = 2,
        Title = "Re-Engineered",
        PublicationDate = new DateTime (2023,04,20),
        ImageUrl = "http://dummyimage.com/220x100.png/5fa2dd/ffffff",
@@ -122,9 +122,9 @@ List<Posts> posts = new()
 
       new Posts
     {
-       Id = 42-4242424,
+       Id = 5,
        UserId = 3,
-       CategoryId = 12-3456789,
+       CategoryId = 5,
        Title = "Engineered",
        PublicationDate = new DateTime (2023,06,11),
        ImageUrl = "http://dummyimage.com/220x100.png/5fa2dd/ffffff",
@@ -138,41 +138,41 @@ List<Subscriptions> subscriptions = new()
 {
     new Subscriptions
     {
-        Id = 93-2257143,
-        FollowerId = 90-7118335,
-        AuthorId = 77-7261001,
+        Id = 1,
+        FollowerId = 5,
+        AuthorId = 5,
         CreatedOn = new DateTime (2023,02,12)
     },
 
      new Subscriptions
     {
-        Id = 88-6656105,
-        FollowerId = 71-9820238,
-        AuthorId = 14-2366074,
+        Id = 2,
+        FollowerId = 4,
+        AuthorId = 2,
         CreatedOn = new DateTime (2023,12,22)
     },
 
       new Subscriptions
     {
-        Id = 02-2210850,
-        FollowerId = 54-5961976,
-        AuthorId = 23-8698546,
+        Id = 3,
+        FollowerId = 3,
+        AuthorId = 4,
         CreatedOn = new DateTime (2023,07,16)
     },
 
       new Subscriptions
     {
-        Id = 10-4200097,
-        FollowerId = 83-2785419,
-        AuthorId = 82-0117022,
+        Id = 4,
+        FollowerId = 2,
+        AuthorId = 1,
         CreatedOn = new DateTime (2022,06,05)
     },
 
       new Subscriptions
       {
-        Id = 04-1773521,
-        FollowerId = 43-1788258,
-        AuthorId = 27-1119523,
+        Id = 5,
+        FollowerId = 1,
+        AuthorId = 3,
         CreatedOn = new DateTime (2024,02,02)
       }
 
@@ -211,7 +211,7 @@ List<Categories> categories = new()
 
                 }
 
-            };
+            }; 
 
 List<Tags> tags = new()
 {
