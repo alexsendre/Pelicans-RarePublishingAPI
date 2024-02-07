@@ -16,9 +16,9 @@ namespace Pelicans_RarePublishing.Models
 
         public string? Username { get; set; }
 
-        public string? Password { get; set; }
+        public string? PasswordHash { get; set; }
 
-        public String? ProfileImageUrl { get; set; }
+        public string? ProfileImageUrl { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 
