@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Pelicans_RarePublishing.Models
+﻿namespace Pelicans_RarePublishing.Models
 {
     public class Users
     {
