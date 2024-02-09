@@ -429,7 +429,7 @@ app.MapGet("/posts/search-by-title", (string query) =>
     {
         return Results.BadRequest("Search query cannot be empty");
     }
-
+    //Takes the query and compares posts to it, then adds any posts containing the query to a list
     var filteredPosts = posts.Where(p => p.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
 
     if (filteredPosts.Count == 0)
@@ -442,7 +442,26 @@ app.MapGet("/posts/search-by-title", (string query) =>
     }
 });
 
-// Get sorted tags
+//Filter by tags
+app.MapGet("/posts/filter-by-tag/{tagId}", (int tagId) =>
+{
+    //find all post ids associated with the given tagId
+    var postIdsWithTag = postTags.Where(pt => pt.TagId == tagId).Select(pt => pt.PostId);
+    //filters posts that contain the post id
+    var filteredPosts = posts.Where(p => postIdsWithTag.Contains(p.Id)).ToList();
+
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found for that tag");
+    }
+    else
+    {
+        return Results.Ok(filteredPosts);
+    }
+});
+
+
+// Get all Tags
 app.MapGet("/tags", () =>
 {
     var sortedTags = tags.OrderBy(tag => tag.Label).ToList();
