@@ -504,5 +504,31 @@ app.MapGet("/postsByUser", (string userName) =>
     return Results.Ok(filteredPosts);
 });
 
+app.MapGet("/users/{userId}", (int userId) =>
+{
+    var user = users.FirstOrDefault(u => u.Id == userId);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+
+    var userDetails = new
+    {
+        FullName = $"{user.FirstName} {user.LastName}",
+        ProfileImage = user.ProfileImageUrl,
+        Username = user.Username,
+        CreationDate = user.CreatedOn,
+        Bio = user.Bio
+    };
+
+    return Results.Ok(userDetails);
+});
+
+app.MapGet("/myPosts", (int userId) =>
+{
+    var currentUserPosts = posts.Where(p => p.UserId == userId).ToList();
+    return Results.Ok(currentUserPosts);
+});
+
 
 app.Run();
