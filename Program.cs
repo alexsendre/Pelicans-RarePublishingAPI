@@ -485,6 +485,24 @@ app.MapGet("/users", () =>
     return Results.Ok(userList);
 });
 
+app.MapGet("/userFullNames", () =>
+{
+    var userFullNames = users.Select(u => $"{u.FirstName} {u.LastName}").ToList();
+    return Results.Ok(userFullNames);
+});
+
+
+app.MapGet("/postsByUser", (string userName) =>
+{
+    var user = users.FirstOrDefault(u => $"{u.FirstName} {u.LastName}" == userName);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+
+    var filteredPosts = posts.Where(p => p.UserId == user.Id).ToList();
+    return Results.Ok(filteredPosts);
+});
 
 
 app.Run();
