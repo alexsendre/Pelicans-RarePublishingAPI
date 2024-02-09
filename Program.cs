@@ -2,73 +2,72 @@ using Pelicans_RarePublishing.Models;
 
 List<Users> users = new()
 {
-                new Users
-                {
-                    Id = 1,
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Email = "john.doe@example.com",
-                    Bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    Username = "johndoe",
-                    PasswordHash = "164961646",
-                    ProfileImageUrl = "https://example.com/profile.jpg",
-                    CreatedOn = DateTime.Now,
-                    Active = true
-                },
-                new Users
-                {
-                    Id = 2,
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Email = "jane.smith@example.com",
-                    Bio = "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    Username = "janesmith",
-                    PasswordHash = "1654494646",
-                    ProfileImageUrl = "https://example.com/profile.jpg",
-                    CreatedOn = DateTime.Now,
-                    Active = false
-                },
-                new Users
-                {
-                    Id = 3,
-                    FirstName = "Alice",
-                    LastName = "Johnson",
-                    Email = "alice.johnson@example.com",
-                    Bio = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                    Username = "alicejohnson",
-                    PasswordHash = "51698466",
-                    ProfileImageUrl = "https://example.com/profile.jpg",
-                    CreatedOn = DateTime.Now,
-                    Active = false
-                },
-                new Users
-                {
-                    Id = 4,
-                    FirstName = "Bob",
-                    LastName = "Brown",
-                    Email = "bob.brown@example.com",
-                    Bio = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                    Username = "bobbrown",
-                    PasswordHash = "1649455",
-                    ProfileImageUrl = "https://example.com/profile.jpg",
-                    CreatedOn = DateTime.Now,
-                    Active = true
-                },
-                new Users
-                {
-                    Id = 5,
-                    FirstName = "Emily",
-                    LastName = "Davis",
-                    Email = "emily.davis@example.com",
-                    Bio = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    Username = "emilydavis",
-                    PasswordHash = "65416564",
-                    ProfileImageUrl = "https://example.com/profile.jpg",
-                    CreatedOn = DateTime.Now,
-                    Active = true
-                }
-
-            };
+    new Users
+    {
+        Id = 1,
+        FirstName = "John",
+        LastName = "Doe",
+        Email = "john.doe@example.com",
+        Bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        Username = "johndoe",
+        PasswordHash = "164961646",
+        ProfileImageUrl = "https://example.com/profile.jpg",
+        CreatedOn = DateTime.Now,
+        Active = true
+    },
+    new Users
+    {
+        Id = 2,
+        FirstName = "Jane",
+        LastName = "Smith",
+        Email = "jane.smith@example.com",
+        Bio = "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        Username = "janesmith",
+        PasswordHash = "1654494646",
+        ProfileImageUrl = "https://example.com/profile.jpg",
+        CreatedOn = DateTime.Now,
+        Active = false
+    },
+    new Users
+    {
+        Id = 3,
+        FirstName = "Alice",
+        LastName = "Johnson",
+        Email = "alice.johnson@example.com",
+        Bio = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        Username = "alicejohnson",
+        PasswordHash = "51698466",
+        ProfileImageUrl = "https://example.com/profile.jpg",
+        CreatedOn = DateTime.Now,
+        Active = false
+    },
+    new Users
+    {
+        Id = 4,
+        FirstName = "Bob",
+        LastName = "Brown",
+        Email = "bob.brown@example.com",
+        Bio = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        Username = "bobbrown",
+        PasswordHash = "1649455",
+        ProfileImageUrl = "https://example.com/profile.jpg",
+        CreatedOn = DateTime.Now,
+        Active = true
+    },
+    new Users
+    {
+        Id = 5,
+        FirstName = "Emily",
+        LastName = "Davis",
+        Email = "emily.davis@example.com",
+        Bio = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        Username = "emilydavis",
+        PasswordHash = "65416564",
+        ProfileImageUrl = "https://example.com/profile.jpg",
+        CreatedOn = DateTime.Now,
+        Active = true
+    }
+};
 
 List<Posts> posts = new()
 {
@@ -131,7 +130,6 @@ List<Posts> posts = new()
        Content = "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
        Approved = true
     },
-
 };
 
 List<Subscriptions> subscriptions = new()
@@ -175,43 +173,95 @@ List<Subscriptions> subscriptions = new()
         AuthorId = 3,
         CreatedOn = new DateTime (2024,02,02)
       }
+};
 
+List<Comments> comments = new()
+{
+    new Comments
+    {
+        Id = 1,
+        AuthorId = 1,
+        PostId = 2,
+        Content = "Wow!! Love it!",
+    },
+    new Comments
+    {
+        Id = 2,
+        AuthorId = 2,
+        PostId = 1,
+        Content = "This is so awesome"
+    },
+    new Comments
+    {
+        Id = 3,
+        AuthorId = 3,
+        PostId = 4,
+        Content = "This is AMAZING!"
+    },
+    new Comments
+    {
+        Id = 4,
+        AuthorId = 4,
+        PostId = 3,
+        Content = "This is so awesome"
+    },
+    new Comments
+    {
+        Id = 5,
+        AuthorId = 5,
+        PostId = 1,
+        Content = "I literally cannot rn omg"
+    },
+};
+
+List<Reactions> reactions = new()
+{
+    new Reactions
+    {
+        // reaction for LIKES
+        Id = 1,
+        Emoji = "f004"
+    },
+    new Reactions
+    {
+        // reaction for HATES
+        Id = 2,
+        Emoji = "f165"
+    }
 };
 
 List<Categories> categories = new()
 {
-                new Categories
-                {
-                    Id = 1,
-                    Label = "Fiction",
+    new Categories
+    {
+        Id = 1,
+        Label = "Fiction",
+                   
+    },
+    new Categories
+    {
+        Id = 2,
+        Label = "Non-fiction",
 
-                },
-                new Categories
-                {
-                    Id = 2,
-                    Label = "Non-fiction",
+    },
+    new Categories
+    {
+        Id = 3,
+        Label = "Science Fiction",
 
-                },
-                new Categories
-                {
-                    Id = 3,
-                    Label = "Science Fiction",
+    },
+    new Categories
+    {
+        Id = 4,
+        Label = "Fantasy",
 
-                },
-                new Categories
-                {
-                    Id = 4,
-                    Label = "Fantasy",
-
-                },
-                new Categories
-                {
-                    Id = 5,
-                    Label = "Mystery",
-
-                }
-
-            };
+    },
+    new Categories
+    {
+        Id = 5,
+        Label = "Mystery",
+    }
+};
 
 List<Tags> tags = new()
 {
@@ -268,6 +318,45 @@ List<PostTags> postTags = new()
         Id= 5,
         PostId= 1,
         TagId= 2,
+    }
+};
+
+List<PostReactions> postReactions = new()
+{
+    new PostReactions
+    {
+        Id = 1,
+        ReactionId = 1,
+        UserId = 2,
+        PostId = 1
+    },
+    new PostReactions
+    {
+        Id = 2,
+        ReactionId= 2,
+        UserId = 3,
+        PostId = 2,
+    },
+    new PostReactions
+    {
+        Id = 3,
+        ReactionId = 1,
+        UserId= 4,
+        PostId= 3,
+    },
+    new PostReactions
+    {
+        Id = 4,
+        ReactionId = 1,
+        UserId = 5,
+        PostId= 4,
+    },
+    new PostReactions
+    {
+        Id = 5,
+        ReactionId = 2,
+        UserId = 1,
+        PostId = 5
     }
 };
 
