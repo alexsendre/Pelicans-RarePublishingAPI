@@ -402,16 +402,65 @@ app.MapGet("posts/{id}", (int id) =>
     }
 });
 
+// Get sorted tags
 app.MapGet("/tags", () =>
 {
     var sortedTags = tags.OrderBy(tag => tag.Label).ToList();
     return sortedTags;
 });
 
+// Create Tags
+app.MapPost("/tags", (Tags tag) =>
+{
+    tag.Id = tags.Max(t => t.Id) + 1;
+    tags.Add(tag);
+    return tag;
+});
+
+// Edit Tags
+app.MapPut("tags/{id}", (int id, Tags tag) =>
+{
+    Tags tagToUpdate = tags.FirstOrDefault(t => t.Id == id);
+    int tagIndex = tags.IndexOf(tagToUpdate);
+    if (tagToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != tag.Id)
+    {
+        return Results.BadRequest();
+    }
+    tags[tagIndex] = tag;
+    return Results.Ok();
+});
+
+//Delete Tags
+app.MapDelete("/tags/{id}", (int id) =>
+{
+    Tags tag = tags.FirstOrDefault(t => t.Id == id);
+    if (tag != null)
+    {
+        return Results.NotFound();
+    }
+    tags.RemoveAt(tag.Id - 1);
+
+    return Results.Ok();
+});
+
 app.MapGet("/posts/{id}/comments", (int id) =>
 {
     var postComments = posts.Where(post => post.Id == id).Select(post => comments.Where(comment => comment.PostId == post.Id));
     return postComments;
+});
+
+app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
+{
+    var post = posts.FirstOrDefault(p => p.Id == id);
+    comment.Id = comments.Max(c => c.Id) + 1;
+    comment.PostId = id;
+    post.Comments = comment;
+
+    return Results.Ok(post);
 });
 
 app.Run();
