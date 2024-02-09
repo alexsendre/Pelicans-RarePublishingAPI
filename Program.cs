@@ -470,6 +470,21 @@ app.MapPost("/newCategories", (Categories category) =>
     return category;
 });
 
+app.MapGet("/users", () =>
+{
+    var sortedUsers = users.OrderBy(u => u.Id).ToList();
+    var userList = sortedUsers.Select(u => new
+    {
+        u.Id,
+        u.Username,
+        u.FirstName,
+        u.LastName,
+        u.Email
+    }).ToList();
+
+    return Results.Ok(userList);
+});
+
 
 
 app.Run();
