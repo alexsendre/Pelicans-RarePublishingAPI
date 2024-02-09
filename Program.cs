@@ -402,4 +402,10 @@ app.MapGet("posts/{id}", (int id) =>
     }
 });
 
+app.MapGet("/tags", () =>
+{
+    var sortedTags = tags.OrderBy(tag => tag.Label).ToList();
+    return sortedTags;
+});
+
 app.Run();
