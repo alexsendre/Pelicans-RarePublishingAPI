@@ -237,6 +237,40 @@ List<Tags> tags = new()
     }
 };
 
+List<PostTags> postTags = new()
+{
+    new PostTags
+    {
+        Id= 1,
+        PostId = 2,
+        TagId= 3,
+    },
+    new PostTags
+    {
+        Id= 2,
+        PostId= 3,
+        TagId= 4,
+    },
+    new PostTags
+    {
+        Id= 3,
+        PostId= 4,
+        TagId= 2,
+    },
+    new PostTags
+    {
+        Id= 4,
+        PostId= 5,
+        TagId= 1,
+    },
+    new PostTags
+    {
+        Id= 5,
+        PostId= 1,
+        TagId= 2,
+    }
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
