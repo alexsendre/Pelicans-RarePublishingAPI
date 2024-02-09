@@ -443,8 +443,4 @@ app.MapDelete("/tags/{id}", (int id) =>
     }
     tags.RemoveAt(tag.Id - 1);
 });
-
-
-
-
 app.Run();
