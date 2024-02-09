@@ -409,7 +409,7 @@ app.MapGet("/tags", () =>
 });
 
 // Create Tags
-app.MapPost("/tags", (Tags, tag) =>
+app.MapPost("/tags", (Tags tag) =>
 {
     tag.Id = tags.Max(t => t.Id) + 1;
     tags.Add(tag);
@@ -442,5 +442,34 @@ app.MapDelete("/tags/{id}", (int id) =>
         return Results.NotFound();
     }
     tags.RemoveAt(tag.Id - 1);
+
+    return Results.Ok();
 });
+
+app.MapGet("/categories", () =>
+{
+    var sortedCategories = categories.OrderBy(c => c.Label).ToList();
+    return sortedCategories;
+});
+
+
+app.MapGet("/postsByCategory/{categoryId}", (int categoryId) =>
+{
+    var filteredPosts = posts.Where(p => p.CategoryId == categoryId).ToList();
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(filteredPosts);
+});
+
+app.MapPost("/newCategories", (Categories category) =>
+{
+    category.Id = categories.Max(c => c.Id) + 1;
+    categories.Add(category);
+    return category;
+});
+
+
+
 app.Run();
