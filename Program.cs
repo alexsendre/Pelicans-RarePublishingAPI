@@ -458,9 +458,23 @@ app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
     var post = posts.FirstOrDefault(p => p.Id == id);
     comment.Id = comments.Max(c => c.Id) + 1;
     comment.PostId = id;
+
+    comments.Add(comment);
     post.Comments = comment;
 
     return Results.Ok(post);
+});
+
+app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
+{
+    var post = posts.FirstOrDefault(p => p.Id == id);
+
+    var commentToDelete = comments.FirstOrDefault(c => c.PostId == id && c.Id == commentId);
+
+    comments.Remove(commentToDelete);
+    post.Comments = null;
+
+    return Results.NoContent();    
 });
 
 app.Run();
