@@ -564,4 +564,65 @@ app.MapPost("/newCategories", (Categories category) =>
     return category;
 });
 
+app.MapGet("/users", () =>
+{
+    var sortedUsers = users.OrderBy(u => u.Id).ToList();
+    var userList = sortedUsers.Select(u => new
+    {
+        u.Id,
+        u.Username,
+        u.FirstName,
+        u.LastName,
+        u.Email
+    }).ToList();
+
+    return Results.Ok(userList);
+});
+
+app.MapGet("/userFullNames", () =>
+{
+    var userFullNames = users.Select(u => $"{u.FirstName} {u.LastName}").ToList();
+    return Results.Ok(userFullNames);
+});
+
+
+app.MapGet("/postsByUser", (string userName) =>
+{
+    var user = users.FirstOrDefault(u => $"{u.FirstName} {u.LastName}" == userName);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+
+    var filteredPosts = posts.Where(p => p.UserId == user.Id).ToList();
+    return Results.Ok(filteredPosts);
+});
+
+app.MapGet("/users/{userId}", (int userId) =>
+{
+    var user = users.FirstOrDefault(u => u.Id == userId);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+
+    var userDetails = new
+    {
+        FullName = $"{user.FirstName} {user.LastName}",
+        ProfileImage = user.ProfileImageUrl,
+        Username = user.Username,
+        CreationDate = user.CreatedOn,
+        Bio = user.Bio
+    };
+
+    return Results.Ok(userDetails);
+});
+
+app.MapGet("/myPosts", (int userId) =>
+{
+    var currentUserPosts = posts.Where(p => p.UserId == userId).ToList();
+    return Results.Ok(currentUserPosts);
+});
+
+
 app.Run();
