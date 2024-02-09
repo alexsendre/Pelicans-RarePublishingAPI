@@ -408,4 +408,10 @@ app.MapGet("/tags", () =>
     return sortedTags;
 });
 
+app.MapGet("/posts/{id}/comments", (int id) =>
+{
+    var postComments = posts.Where(post => post.Id == id).Select(post => comments.Where(comment => comment.PostId == post.Id));
+    return postComments;
+});
+
 app.Run();
