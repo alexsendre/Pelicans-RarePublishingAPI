@@ -384,11 +384,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//Get All Posts
 app.MapGet("/posts", () =>
 {
     return posts;
 });
 
+//Get post details
 app.MapGet("posts/{id}", (int id) =>
 {
     Posts userPosts = posts.FirstOrDefault(p => p.Id == id);
@@ -401,6 +403,45 @@ app.MapGet("posts/{id}", (int id) =>
         return Results.Ok(userPosts);
     }
 });
+
+//Gets Subscribed posts by followerId
+app.MapGet("/{followerId}", (int followerId) =>
+{
+    //filters subscriptions by followerId and grabs all of the author ids
+    var subscribedAuthors = subscriptions.Where(s => s.FollowerId == followerId).Select(s => s.AuthorId);
+    //filters the posts using the authorIds/UserIds
+    var subscribedPosts = posts.Where(p => subscribedAuthors.Contains(p.UserId)).ToList();
+
+    if (subscribedPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found!");
+    }
+    else
+    {
+        return Results.Ok(subscribedPosts);
+    }
+});
+
+//Use search terms to filter by titles
+app.MapGet("/posts/search-by-title", (string query) =>
+{
+    if (string.IsNullOrWhiteSpace(query))
+    {
+        return Results.BadRequest("Search query cannot be empty");
+    }
+
+    var filteredPosts = posts.Where(p => p.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found for the given search query.");
+    }
+    else
+    {
+        return Results.Ok(filteredPosts);
+    }
+});
+
 
 // Get all Tags
 app.MapGet("/tags", () =>
