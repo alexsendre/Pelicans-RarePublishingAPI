@@ -402,10 +402,45 @@ app.MapGet("posts/{id}", (int id) =>
     }
 });
 
-app.MapGet("/categories", () =>
+// Get all Tags
+app.MapGet("/tags", () =>
 {
-    var sortedCategories = categories.OrderBy(c => c.Label).ToList();
-    return sortedCategories;
+    return tags;
 });
 
+// Create Tags
+app.MapPost("/tags", (Tags, tag) =>
+{
+    tag.Id = tags.Max(t => t.Id) + 1;
+    tags.Add(tag);
+    return tag;
+});
+
+// Edit Tags
+app.MapPut("tags/{id}", (int id, Tags tag) =>
+{
+    Tags tagToUpdate = tags.FirstOrDefault(t => t.Id == id);
+    int tagIndex = tags.IndexOf(tagToUpdate);
+    if (tagToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != tag.Id)
+    {
+        return Results.BadRequest();
+    }
+    tags[tagIndex] = tag;
+    return Results.Ok();
+});
+
+//Delete Tags
+app.MapDelete("/tags/{id}", (int id) =>
+{
+    Tags tag = tags.FirstOrDefault(t => t.Id == id);
+    if (tag != null)
+    {
+        return Results.NotFound();
+    }
+    tags.RemoveAt(tag.Id - 1);
+});
 app.Run();
