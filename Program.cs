@@ -422,6 +422,26 @@ app.MapGet("/{followerId}", (int followerId) =>
     }
 });
 
+//Use search terms to filter by titles
+app.MapGet("/posts/search-by-title", (string query) =>
+{
+    if (string.IsNullOrWhiteSpace(query))
+    {
+        return Results.BadRequest("Search query cannot be empty");
+    }
+
+    var filteredPosts = posts.Where(p => p.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found for the given search query.");
+    }
+    else
+    {
+        return Results.Ok(filteredPosts);
+    }
+});
+
 
 // Get all Tags
 app.MapGet("/tags", () =>
@@ -430,7 +450,7 @@ app.MapGet("/tags", () =>
 });
 
 // Create Tags
-app.MapPost("/tags", (Tags, tag) =>
+app.MapPost("/tags", (Tags tag) =>
 {
     tag.Id = tags.Max(t => t.Id) + 1;
     tags.Add(tag);
@@ -463,5 +483,6 @@ app.MapDelete("/tags/{id}", (int id) =>
         return Results.NotFound();
     }
     tags.RemoveAt(tag.Id - 1);
+    return Results.Ok();
 });
 app.Run();
