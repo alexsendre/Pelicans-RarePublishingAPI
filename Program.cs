@@ -384,11 +384,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//Get All Posts
 app.MapGet("/posts", () =>
 {
     return posts;
 });
 
+//Get post details
 app.MapGet("posts/{id}", (int id) =>
 {
     Posts userPosts = posts.FirstOrDefault(p => p.Id == id);
@@ -399,6 +401,44 @@ app.MapGet("posts/{id}", (int id) =>
     else
     {
         return Results.Ok(userPosts);
+    }
+});
+
+//Gets Subscribed posts by followerId
+app.MapGet("/{followerId}", (int followerId) =>
+{
+    //filters subscriptions by followerId and grabs all of the author ids
+    var subscribedAuthors = subscriptions.Where(s => s.FollowerId == followerId).Select(s => s.AuthorId);
+    //filters the posts using the authorIds/UserIds
+    var subscribedPosts = posts.Where(p => subscribedAuthors.Contains(p.UserId)).ToList();
+
+    if (subscribedPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found!");
+    }
+    else
+    {
+        return Results.Ok(subscribedPosts);
+    }
+});
+
+//Use search terms to filter by titles
+app.MapGet("/posts/search-by-title", (string query) =>
+{
+    if (string.IsNullOrWhiteSpace(query))
+    {
+        return Results.BadRequest("Search query cannot be empty");
+    }
+
+    var filteredPosts = posts.Where(p => p.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound("No posts found for the given search query.");
+    }
+    else
+    {
+        return Results.Ok(filteredPosts);
     }
 });
 
@@ -447,12 +487,15 @@ app.MapDelete("/tags/{id}", (int id) =>
     return Results.Ok();
 });
 
+// get specific posts' comments
 app.MapGet("/posts/{id}/comments", (int id) =>
 {
+    // firstly ensure the post id matches the selected post then select only the comments that match the commentId on the specific post
     var postComments = posts.Where(post => post.Id == id).Select(post => comments.Where(comment => comment.PostId == post.Id));
     return postComments;
 });
 
+// post a comment on specific post
 app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
 {
     var post = posts.FirstOrDefault(p => p.Id == id);
@@ -465,6 +508,7 @@ app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
     return Results.Ok(post);
 });
 
+// delete a specific comment on specific post
 app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
 {
     var post = posts.FirstOrDefault(p => p.Id == id);
@@ -472,9 +516,33 @@ app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
     var commentToDelete = comments.FirstOrDefault(c => c.PostId == id && c.Id == commentId);
 
     comments.Remove(commentToDelete);
-    post.Comments = null;
+    post.Comments = null; // deletes the comment by setting it to null
 
     return Results.NoContent();    
+});
+
+app.MapGet("/categories", () =>
+{
+    var sortedCategories = categories.OrderBy(c => c.Label).ToList();
+    return sortedCategories;
+});
+
+
+app.MapGet("/postsByCategory/{categoryId}", (int categoryId) =>
+{
+    var filteredPosts = posts.Where(p => p.CategoryId == categoryId).ToList();
+    if (filteredPosts.Count == 0)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(filteredPosts);
+});
+
+app.MapPost("/newCategories", (Categories category) =>
+{
+    category.Id = categories.Max(c => c.Id) + 1;
+    categories.Add(category);
+    return category;
 });
 
 app.Run();
