@@ -390,6 +390,44 @@ app.MapGet("/posts", () =>
     return posts;
 });
 
+//Create a Post
+app.MapPost("/posts", (Posts post) =>
+{
+    post.Id = posts.Max(p => p.Id) + 1;
+    posts.Add(post);
+    return Results.Created($"/posts/{post.Id}", post);
+});
+
+//Edit a Post
+app.MapPut("/posts/{id}", (int id, Posts updatedPost) =>
+{
+    var post = posts.FirstOrDefault(p => p.Id == id);
+    if (post == null)
+    {
+        return Results.NotFound($"This Post {id} was not found.");
+    }
+    post.Title = updatedPost.Title;
+    post.PublicationDate = updatedPost.PublicationDate;
+    post.ImageUrl = updatedPost.ImageUrl;
+    post.Content = updatedPost.Content;
+    post.CategoryId = updatedPost.CategoryId;
+    post.Approved = updatedPost.Approved;
+
+    return Results.Ok(post);
+});
+
+//Delete a Post
+app.MapDelete("posts/{id}", (int id) =>
+{
+    Posts post = posts.FirstOrDefault(p => p.Id == id);
+    if (post != null)
+    {
+        return Results.NotFound();
+    }
+    posts.Remove(post);
+
+    return Results.Ok(new {message = "The Post has been deleted."});
+});
 //Get post details
 app.MapGet("posts/{id}", (int id) =>
 {
