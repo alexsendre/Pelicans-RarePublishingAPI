@@ -236,7 +236,7 @@ List<Categories> categories = new()
     {
         Id = 1,
         Label = "Fiction",
-                   
+
     },
     new Categories
     {
@@ -426,7 +426,7 @@ app.MapDelete("posts/{id}", (int id) =>
     }
     posts.Remove(post);
 
-    return Results.Ok(new {message = "The Post has been deleted."});
+    return Results.Ok(new { message = "The Post has been deleted." });
 });
 //Get post details
 app.MapGet("posts/{id}", (int id) =>
@@ -458,6 +458,30 @@ app.MapGet("/{followerId}", (int followerId) =>
     {
         return Results.Ok(subscribedPosts);
     }
+});
+
+//Subscribe
+app.MapPost("/subscription", (Subscriptions subscription) =>
+{
+    subscription.Id = subscriptions.Max(s => s.Id) + 1;
+    subscription.CreatedOn = DateTime.Now;
+    subscriptions.Add(subscription);
+    return subscription;
+});
+
+
+//Unsubscribe
+app.MapDelete("/subscription/{id}", (int id) =>
+{
+    //Grabs the subscription by id
+    Subscriptions subscriptionToDelete = subscriptions.FirstOrDefault(s => s.Id == id);
+    if (subscriptionToDelete == null)
+    {
+        return Results.NotFound("No subscription with given ID found!")
+    }
+    subscriptions.Remove(subscriptionToDelete);
+    return Results.Ok("Subscription removed!");
+
 });
 
 //Use search terms to filter by titles
@@ -566,7 +590,7 @@ app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
 });
 
 // delete a specific comment on specific post
-app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
+app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId) =>
 {
     var post = posts.FirstOrDefault(p => p.Id == id);
 
@@ -575,7 +599,7 @@ app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
     comments.Remove(commentToDelete);
     post.Comments = null; // deletes the comment by setting it to null
 
-    return Results.NoContent();    
+    return Results.NoContent();
 });
 
 app.MapGet("/categories", () =>
