@@ -236,7 +236,7 @@ List<Categories> categories = new()
     {
         Id = 1,
         Label = "Fiction",
-
+                   
     },
     new Categories
     {
@@ -426,7 +426,7 @@ app.MapDelete("posts/{id}", (int id) =>
     }
     posts.Remove(post);
 
-    return Results.Ok(new { message = "The Post has been deleted." });
+    return Results.Ok(new {message = "The Post has been deleted."});
 });
 //Get post details
 app.MapGet("posts/{id}", (int id) =>
@@ -477,11 +477,13 @@ app.MapDelete("/subscription/{id}", (int id) =>
     Subscriptions subscriptionToDelete = subscriptions.FirstOrDefault(s => s.Id == id);
     if (subscriptionToDelete == null)
     {
-        return Results.NotFound("No subscription with given ID found!")
+        return Results.NotFound("No subscription with given ID found!");
     }
-    subscriptions.Remove(subscriptionToDelete);
-    return Results.Ok("Subscription removed!");
-
+    else
+    {
+        subscriptions.Remove(subscriptionToDelete);
+        return Results.Ok("Subscription removed!");
+    }
 });
 
 //Use search terms to filter by titles
@@ -590,7 +592,7 @@ app.MapPost("/posts/{id}/comments", (int id, Comments comment) =>
 });
 
 // delete a specific comment on specific post
-app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId) =>
+app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId ) =>
 {
     var post = posts.FirstOrDefault(p => p.Id == id);
 
@@ -599,7 +601,7 @@ app.MapDelete("/posts/{id}/comments/{commentId}", (int id, int commentId) =>
     comments.Remove(commentToDelete);
     post.Comments = null; // deletes the comment by setting it to null
 
-    return Results.NoContent();
+    return Results.NoContent();    
 });
 
 app.MapGet("/categories", () =>
@@ -686,16 +688,5 @@ app.MapGet("/myPosts", (int userId) =>
     return Results.Ok(currentUserPosts);
 });
 
-// Add Tags to Post
-app.MapPost("/posts/{postId}/tags", (int postId, int tagId) =>
-{
-    PostTags postTag = new PostTags
-    {
-        Id = postTags.Max(postTag => postTag.Id) + 1,
-        PostId = postId,
-        TagId = tagId,
-    };
-    postTags.Add(postTag);
-    return Results.Ok(postTag);
-});
+
 app.Run();
