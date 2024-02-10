@@ -420,7 +420,7 @@ app.MapPut("/posts/{id}", (int id, Posts updatedPost) =>
 app.MapDelete("posts/{id}", (int id) =>
 {
     Posts post = posts.FirstOrDefault(p => p.Id == id);
-    if post != null)
+    if (post != null)
     {
         return Results.NotFound();
     }
@@ -428,8 +428,6 @@ app.MapDelete("posts/{id}", (int id) =>
 
     return Results.Ok(new {message = "The Post has been deleted."});
 });
-
-}
 //Get post details
 app.MapGet("posts/{id}", (int id) =>
 {
