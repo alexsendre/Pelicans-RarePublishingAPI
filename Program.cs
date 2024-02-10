@@ -662,5 +662,16 @@ app.MapGet("/myPosts", (int userId) =>
     return Results.Ok(currentUserPosts);
 });
 
-
+// Add Tags to Post
+app.MapPost("/posts/{postId}/tags", (int postId, int tagId) =>
+{
+    PostTags postTag = new PostTags
+    {
+        Id = postTags.Max(postTag => postTag.Id) + 1,
+        PostId = postId,
+        TagId = tagId,
+    };
+    postTags.Add(postTag);
+    return Results.Ok(postTag);
+});
 app.Run();
