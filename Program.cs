@@ -700,4 +700,5 @@ app.MapGet("/myPosts", (int userId) =>
     return Results.Ok(currentUserPosts);
 });
 
+
 app.Run();
