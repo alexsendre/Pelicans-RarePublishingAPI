@@ -700,5 +700,37 @@ app.MapGet("/myPosts", (int userId) =>
     return Results.Ok(currentUserPosts);
 });
 
+// Add Tags to Post
+app.MapPost("/posts/{postId}/tags", (int postId, int tagId) =>
+{
+    PostTags postTag = new PostTags
+    {
+        Id = postTags.Max(postTag => postTag.Id) + 1,
+        PostId = postId,
+        TagId = tagId,
+    };
+    postTags.Add(postTag);
+    return Results.Ok(postTag);
+});
+
+// Update Tags on Posts
+app.MapPatch("/posts/{postId}/tags", (int postId, List<int> tagsIds) =>
+{
+    Posts postToUpdate = posts.FirstOrDefault(p => p.Id == postId);
+    if (postToUpdate == null)
+    {
+        return Results.NotFound("The Post was not found.");
+    }
+
+    postTags.RemoveAll(IntPtr => IntPtr.PostId == postId);
+    postTags.AddRange(tagsIds.Select(tagsIds => new PostTags
+    {
+        Id = postTags.Count + 1,
+        PostId = postId,
+        TagId = tagsIds
+    }));
+
+    return Results.Ok("The Tags have been successfully updated!");
+});
 
 app.Run();
