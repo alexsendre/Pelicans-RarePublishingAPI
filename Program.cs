@@ -460,6 +460,32 @@ app.MapGet("/{followerId}", (int followerId) =>
     }
 });
 
+//Subscribe
+app.MapPost("/subscription", (Subscriptions subscription) =>
+{
+    subscription.Id = subscriptions.Max(s => s.Id) + 1;
+    subscription.CreatedOn = DateTime.Now;
+    subscriptions.Add(subscription);
+    return subscription;
+});
+
+
+//Unsubscribe
+app.MapDelete("/subscription/{id}", (int id) =>
+{
+    //Grabs the subscription by id
+    Subscriptions subscriptionToDelete = subscriptions.FirstOrDefault(s => s.Id == id);
+    if (subscriptionToDelete == null)
+    {
+        return Results.NotFound("No subscription with given ID found!");
+    }
+    else
+    {
+        subscriptions.Remove(subscriptionToDelete);
+        return Results.Ok("Subscription removed!");
+    }
+});
+
 //Use search terms to filter by titles
 app.MapGet("/posts/search-by-title", (string query) =>
 {
@@ -662,16 +688,5 @@ app.MapGet("/myPosts", (int userId) =>
     return Results.Ok(currentUserPosts);
 });
 
-// Add Tags to Post
-app.MapPost("/posts/{postId}/tags", (int postId, int tagId) =>
-{
-    PostTags postTag = new PostTags
-    {
-        Id = postTags.Max(postTag => postTag.Id) + 1,
-        PostId = postId,
-        TagId = tagId,
-    };
-    postTags.Add(postTag);
-    return Results.Ok(postTag);
-});
+
 app.Run();
